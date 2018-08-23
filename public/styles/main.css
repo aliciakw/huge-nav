@@ -19,6 +19,10 @@ h1 {
   text-align: center;
   color: #fff;
 }
+p {
+  font: 1.8em GalazieCopernicusBook;
+  line-height: 1.3em;
+}
 header {
   top: 0;
   z-index: 1;
@@ -45,8 +49,8 @@ nav ul li {
   height: 24px;
   padding: 24px;
   font-family: HUGEAvantGardeBold;
-  font-size: 18px;
-  line-height: 34px;
+  font-size: 22px;
+  line-height: 32px;
   transition: color .2s, background .2s;
 }
 nav ul li:hover {
@@ -61,12 +65,14 @@ main {
   position: relative;
 }
 section {
-  padding: 60px 132px;
-  width: 100%;
-  box-sizing: border-box;
+  padding: 60px 0;
+  margin: 0px auto;
+  width: 968px;
 }
 section.cover {
   position: relative;
   height: 640px;
+  width: 100%;
   background: url('/images/background-image.jpg');
+  padding: 0;
 }
