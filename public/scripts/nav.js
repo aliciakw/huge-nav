@@ -1,13 +1,34 @@
-const MAIN_NAV_LIST_ID = 'main-nav';
-const MAIN_NAV_ITEM_CLASSNAME = 'nav-list-item';
-const SUB_NAV_LIST_CLASSNAME = 'sub-nav';
+var MAIN_NAV_LIST_ID = 'main-nav';
+var MAIN_NAV_ITEM_CLASSNAME = 'nav-list-item';
+var SUB_NAV_LIST_CLASSNAME = 'sub-nav';
+var HIDDEN_CLASSNAME = 'hidden';
 
 var blanket = document.getElementById('blanket');
 var mainNav = document.getElementById(MAIN_NAV_LIST_ID);
 var mainNavList = mainNav.getElementsByTagName('ul')[0];
 var navListItems = document.getElementsByClassName(MAIN_NAV_ITEM_CLASSNAME);
 
-// Render Nav content from JSON file
+// Animation Helpers
+function showBlanket() {
+    blanket.style.opacity = 0.4;
+    blanket.style.height = '100%';
+}
+function hideBlanket() {
+    blanket.style.opacity = 0;
+    blanket.style.height = 0;
+}
+function showSubNav(event) {
+    var element = event.currentTarget;
+    var selectedSubnav = element.getElementsByClassName(SUB_NAV_LIST_CLASSNAME)[0];
+    selectedSubnav.className = SUB_NAV_LIST_CLASSNAME;
+}
+function hideSubNav(event) {
+    var element = event.currentTarget;
+    var selectedSubnav = element.getElementsByClassName(SUB_NAV_LIST_CLASSNAME)[0];
+    selectedSubnav.className = SUB_NAV_LIST_CLASSNAME + ' ' + HIDDEN_CLASSNAME;
+}
+
+// Rendering helpers
 function renderSubNavListItem({ label, url }) {;
     var li = document.createElement('li');
     var anchor = document.createElement('a');
@@ -25,48 +46,29 @@ function renderNavListItem({ label, url, items }) {
     var labelText = document.createTextNode(label);
 
     var subNavList = document.createElement('ul');
-    subNavList.className = SUB_NAV_LIST_CLASSNAME;
+    subNavList.className = SUB_NAV_LIST_CLASSNAME + ' ' + HIDDEN_CLASSNAME;
     items.forEach((subNavItem) => {
-        var rendered = renderSubNavListItem(subNavItem);
-        subNavList.appendChild(rendered);
+        subNavList.appendChild(renderSubNavListItem(subNavItem));
     });
   
     anchor.appendChild(labelText);
     li.appendChild(anchor);
-    li.appendChild(subNavList);    
+    li.appendChild(subNavList);
+    li.addEventListener('mouseenter', showSubNav);
+    li.addEventListener('mouseleave', hideSubNav);    
     mainNavList.appendChild(li);
 }
 
 function buildNavFromJson() {
     var navData = JSON.parse(this.responseText).items;
-    console.log('>>>', navData[0]);
     navData.forEach(renderNavListItem);
 }
 
+// Render Nav content from JSON file
 var oReq = new XMLHttpRequest();
 oReq.addEventListener("load", buildNavFromJson);
 oReq.open("GET", "/api/nav.json");
 oReq.send();
 
-
-
-// Interacitivity
-function showBlanket() {
-    blanket.style.opacity = 0.4;
-    blanket.style.height = '100%';
-}
-function hideBlanket() {
-    blanket.style.opacity = 0;
-    blanket.style.height = 0;
-}
-mainNav.addEventListener('mouseenter', () => showBlanket());
-mainNav.addEventListener('mouseleave', () => hideBlanket());
-for (var i = 0; i < navListItems.length; i++) {
-    var navItem = navListItems[i];
-    navItem.addEventListener('mouseenter', () => {
-        //showBlanket();
-    });
-    navItem.addEventListener('mouseleave', () => {
-        //hideBlanket();
-    });
-}
+mainNav.addEventListener('mouseenter', showBlanket);
+mainNav.addEventListener('mouseleave', hideBlanket);
