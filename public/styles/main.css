@@ -40,6 +40,7 @@ header {
   z-index: 2;
   position: fixed;
   width: 100%;
+  min-width: 1100px;
   height: 72px;
   background: #ec008c;
   overflow-x: hidden;
@@ -83,9 +84,10 @@ nav ul {
   height: 24px;
   padding: 24px;
   display: block;
-  font-family: HUGEAvantGardeBold;
-  font-size: 22px;
+  font: 22px HUGEAvantGardeBold;
   line-height: 32px;
+  text-decoration: none;
+  color: #fff;
   transition: color .2s, background .2s;
 }
 .nav-list-item:hover {
