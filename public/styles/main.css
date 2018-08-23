@@ -5,8 +5,8 @@ body {
   color: #fff;
   margin: 0;
   padding: 0;
+  min-width: 1100px;
 }
-
 h1 {
   position: absolute;
   top: 50%;
@@ -20,19 +20,31 @@ h1 {
   color: #fff;
 }
 p {
-  font: 1.8em GalazieCopernicusBook;
+  font: 1.8em GalaxieCopernicusBook;
   line-height: 1.3em;
+}
+#blanket {
+  top: 0;
+  left: 0;
+  z-index: 1;
+  position: fixed;
+  background: #000;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  height: 0;
+  transition: opacity .5s;
 }
 header {
   top: 0;
-  z-index: 1;
+  z-index: 2;
   position: fixed;
   width: 100%;
   height: 72px;
   background: #ec008c;
   overflow: hidden;
 }
-img.nav-logo {
+#nav-logo-desktop {
   margin: 24px 48px 24px 24px;
 }
 nav {
@@ -44,7 +56,7 @@ nav ul {
   padding: 0;
   margin: 0;
 }
-nav ul li {
+.nav-list-item {
   display: inline-block;
   height: 24px;
   padding: 24px;
@@ -53,7 +65,7 @@ nav ul li {
   line-height: 32px;
   transition: color .2s, background .2s;
 }
-nav ul li:hover {
+.nav-list-item:hover {
   background: #fff;
   color: #ec008c;
   cursor: pointer;
