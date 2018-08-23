@@ -137,7 +137,7 @@ ul.sub-nav li a:hover {
   h1 {
     color: black;
     font-size: 4em;
-    margin: 50px 0;
+    padding: 50px 0;
   }
   section.cover {
     height: 240px;
