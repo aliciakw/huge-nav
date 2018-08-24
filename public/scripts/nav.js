@@ -11,9 +11,9 @@ var HIDDEN_SUB_NAV_LIST_CLASSNAME = SUB_NAV_LIST_CLASSNAME + ' ' + HIDDEN_CLASSN
 var blanket = document.getElementById('blanket');
 var mainNav = document.getElementById(MAIN_NAV_LIST_ID);
 var mainNavList = mainNav.getElementsByTagName('ul')[0];
-var navListItems = document.getElementsByClassName(MAIN_NAV_ITEM_CLASSNAME);
 var openMobileNavButton = document.getElementById('nav-mobile-open');
 var closeMobileNavButton = document.getElementById('nav-mobile-close');
+var navLogo = document.getElementById('nav-logo-desktop');
 
 // Animation Helpers
 function showBlanket() {
@@ -38,14 +38,26 @@ function hideSubNav(event) {
     var selectedSubnav = element.getElementsByClassName(SUB_NAV_LIST_CLASSNAME)[0];
     selectedSubnav.className = HIDDEN_SUB_NAV_LIST_CLASSNAME;
 }
+function openMobileNav() {
+    showBlanket();
+    mainNav.className = '';
+    openMobileNavButton.className = HIDDEN_CLASSNAME;
+    closeMobileNavButton.className = VISIBLE_MOBILE_CLASSNAME;
+    navLogo.parentElement.className = '';
+}
+function closeMobileNav() {
+    hideBlanket();
+    mainNav.className = HIDDEN_MOBILE_CLASSNAME;
+    openMobileNavButton.className = VISIBLE_MOBILE_CLASSNAME;
+    closeMobileNavButton.className = HIDDEN_CLASSNAME;
+    navLogo.parentElement.className = HIDDEN_MOBILE_CLASSNAME;
+}
 function toggleMobileNav() {
     var mobileNavIsOpen = mainNav.getAttribute('class').includes(HIDDEN_MOBILE_CLASSNAME);
     if (mobileNavIsOpen) {
-        showBlanket();
-        mainNav.className = '';
+        openMobileNav()
     } else {
-        hideBlanket();
-        mainNav.className = HIDDEN_MOBILE_CLASSNAME;
+        closeMobileNav();
     }
 }
 function toggleMobileSubNav(event) {
@@ -106,8 +118,12 @@ function renderNavListItem({ label, url, items = [] }) {
 }
 
 function buildNavFromJson() {
-    var navData = JSON.parse(this.responseText).items;
-    navData.forEach(renderNavListItem);
+    var res = this.responseText;
+    // console.log('!!!!!!!!!!!!!', res);
+    if (res) {
+        var navData = JSON.parse(res).items;
+        navData.forEach(renderNavListItem);
+    }
 }
 
 // Render Nav content from JSON file
@@ -116,6 +132,33 @@ oReq.addEventListener("load", buildNavFromJson);
 oReq.open("GET", "/api/nav.json");
 oReq.send();
 
+
+
+
+
+function sum (a, b) {
+  return a + b;
+} 
+
 mainNav.addEventListener('mouseenter', showBlanket);
 mainNav.addEventListener('mouseleave', hideBlanket);
 openMobileNavButton.addEventListener('click', toggleMobileNav);
+closeMobileNavButton.addEventListener('click', toggleMobileNav);
+ 
+function getBlanket() {
+  return document.getElementById('blanket');
+}
+
+if (typeof exports == "undefined") {
+    exports = this;
+} else {
+    module.exports = {
+        sum,
+        getBlanket,
+        buildNavFromJson,
+        openMobileNav,
+        closeMobileNav,
+        toggleMobileNav
+    };
+}
+
