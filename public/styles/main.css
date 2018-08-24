@@ -169,11 +169,14 @@ ul.sub-nav li a:hover {
   }
   header button {
     padding: 0;
-    background:transparent;
+    background: transparent;
     border: none;
   }
   header button:hover {
     cursor: pointer;
+  }
+  #nav-mobile-close {
+    float: right;
   }
   #main-nav > ul > li {
     display: block;
@@ -192,5 +195,11 @@ ul.sub-nav li a:hover {
   }
   ul.sub-nav {
     width: calc(100% - 72px);
+  }
+  .caret {
+    float: right;
+  }
+  .flip {
+    transform: rotate(180deg);
   }
 }

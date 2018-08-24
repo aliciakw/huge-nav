@@ -1,14 +1,19 @@
+var HIDDEN_CLASSNAME = 'hidden';
+var HIDDEN_MOBILE_CLASSNAME = 'hidden-mobile';
+var VISIBLE_MOBILE_CLASSNAME = 'visible-mobile';
+var FLIP_CLASSNAME = 'flip';
+var CARET_CLASSNAME = 'caret' + ' ' + VISIBLE_MOBILE_CLASSNAME;
 var MAIN_NAV_LIST_ID = 'main-nav';
 var MAIN_NAV_ITEM_CLASSNAME = 'nav-list-item';
 var SUB_NAV_LIST_CLASSNAME = 'sub-nav';
-var HIDDEN_SUB_NAV_LIST_CLASSNAME = 'sub-nav hidden';
-var CARET_DOWN_CLASSNAMES = 'caret caret-down';
-var CARET_UP_CLASSNAMES = 'caret caret-up';
+var HIDDEN_SUB_NAV_LIST_CLASSNAME = SUB_NAV_LIST_CLASSNAME + ' ' + HIDDEN_CLASSNAME;
 
 var blanket = document.getElementById('blanket');
 var mainNav = document.getElementById(MAIN_NAV_LIST_ID);
 var mainNavList = mainNav.getElementsByTagName('ul')[0];
 var navListItems = document.getElementsByClassName(MAIN_NAV_ITEM_CLASSNAME);
+var openMobileNavButton = document.getElementById('nav-mobile-open');
+var closeMobileNavButton = document.getElementById('nav-mobile-close');
 
 // Animation Helpers
 function showBlanket() {
@@ -23,11 +28,42 @@ function showSubNav(event) {
     var element = event.currentTarget;
     var selectedSubnav = element.getElementsByClassName(SUB_NAV_LIST_CLASSNAME)[0];
     selectedSubnav.className = SUB_NAV_LIST_CLASSNAME;
+    var carets = element.getElementsByClassName(CARET_CLASSNAME);
+    if (carets.length) {
+        carets[0].className = CARET_CLASSNAME + ' ' + FLIP_CLASSNAME;
+    }
 }
 function hideSubNav(event) {
     var element = event.currentTarget;
     var selectedSubnav = element.getElementsByClassName(SUB_NAV_LIST_CLASSNAME)[0];
     selectedSubnav.className = HIDDEN_SUB_NAV_LIST_CLASSNAME;
+}
+function toggleMobileNav() {
+    var mobileNavIsOpen = mainNav.getAttribute('class').includes(HIDDEN_MOBILE_CLASSNAME);
+    if (mobileNavIsOpen) {
+        showBlanket();
+        mainNav.className = '';
+    } else {
+        hideBlanket();
+        mainNav.className = HIDDEN_MOBILE_CLASSNAME;
+    }
+}
+function toggleMobileSubNav(event) {
+    var navSection = event.currentTarget.parentElement;
+    var currentSubNav = navSection.getElementsByClassName(SUB_NAV_LIST_CLASSNAME)[0];
+    var subNavIsClosed = currentSubNav.getAttribute('class').includes(HIDDEN_CLASSNAME);
+    var carets = navSection.getElementsByClassName(CARET_CLASSNAME);
+    if (subNavIsClosed) {
+        currentSubNav.className = SUB_NAV_LIST_CLASSNAME;
+        if (carets.length) {
+            carets[0].className = CARET_CLASSNAME + ' ' + FLIP_CLASSNAME;
+        }
+    } else {
+        currentSubNav.className = HIDDEN_SUB_NAV_LIST_CLASSNAME;
+        if (carets.length) {
+            carets[0].className = CARET_CLASSNAME;
+        }
+    }
 }
 
 // Rendering helpers
@@ -51,8 +87,9 @@ function renderNavListItem({ label, url, items = [] }) {
     if (items.length) {
         var caret = document.createElement('img');
         caret.src = "images/caret.svg";
-        caret.className = 'right';
+        caret.className = CARET_CLASSNAME;
         anchor.appendChild(caret);
+        anchor.addEventListener('click', toggleMobileSubNav);
     }
     subNavList.className = HIDDEN_SUB_NAV_LIST_CLASSNAME;
     items.forEach((subNavItem) => {
@@ -81,3 +118,4 @@ oReq.send();
 
 mainNav.addEventListener('mouseenter', showBlanket);
 mainNav.addEventListener('mouseleave', hideBlanket);
+openMobileNavButton.addEventListener('click', toggleMobileNav);
