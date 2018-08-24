@@ -124,7 +124,7 @@ ul.sub-nav li a:hover {
 }
 
 /* mobile styles */
-@media (max-width: 750px) {
+@media (max-width: 768px) {
   .hidden-mobile {
     display: none;
   }
