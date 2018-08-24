@@ -1,7 +1,9 @@
 var MAIN_NAV_LIST_ID = 'main-nav';
 var MAIN_NAV_ITEM_CLASSNAME = 'nav-list-item';
 var SUB_NAV_LIST_CLASSNAME = 'sub-nav';
-var HIDDEN_CLASSNAME = 'hidden';
+var HIDDEN_SUB_NAV_LIST_CLASSNAME = 'sub-nav hidden';
+var CARET_DOWN_CLASSNAMES = 'caret caret-down';
+var CARET_UP_CLASSNAMES = 'caret caret-up';
 
 var blanket = document.getElementById('blanket');
 var mainNav = document.getElementById(MAIN_NAV_LIST_ID);
@@ -25,7 +27,7 @@ function showSubNav(event) {
 function hideSubNav(event) {
     var element = event.currentTarget;
     var selectedSubnav = element.getElementsByClassName(SUB_NAV_LIST_CLASSNAME)[0];
-    selectedSubnav.className = SUB_NAV_LIST_CLASSNAME + ' ' + HIDDEN_CLASSNAME;
+    selectedSubnav.className = HIDDEN_SUB_NAV_LIST_CLASSNAME;
 }
 
 // Rendering helpers
@@ -38,18 +40,25 @@ function renderSubNavListItem({ label, url }) {;
     li.appendChild(anchor);
     return li;
 }
-function renderNavListItem({ label, url, items }) {
+function renderNavListItem({ label, url, items = [] }) {
     var li = document.createElement('li');
     var anchor = document.createElement('a');
     anchor.className = MAIN_NAV_ITEM_CLASSNAME;
     anchor.href = url;
     var labelText = document.createTextNode(label);
-
     var subNavList = document.createElement('ul');
-    subNavList.className = SUB_NAV_LIST_CLASSNAME + ' ' + HIDDEN_CLASSNAME;
+
+    if (items.length) {
+        var caret = document.createElement('img');
+        caret.src = "images/caret.svg";
+        caret.className = 'right';
+        anchor.appendChild(caret);
+    }
+    subNavList.className = HIDDEN_SUB_NAV_LIST_CLASSNAME;
     items.forEach((subNavItem) => {
         subNavList.appendChild(renderSubNavListItem(subNavItem));
     });
+    
   
     anchor.appendChild(labelText);
     li.appendChild(anchor);
