@@ -119,12 +119,12 @@ ul.sub-nav li a:hover {
 .hidden, .visible-mobile {
   display: none;
 }
-.right {
-  float: right;
-}
 
 /* mobile styles */
 @media (max-width: 750px) {
+  body, header {
+    min-width: initial;
+  }
   .hidden-mobile {
     display: none;
   }
@@ -134,20 +134,10 @@ ul.sub-nav li a:hover {
   .hidden-desktop {
     display: initial;
   }
-  body {
-    min-width: initial;
-  }
-  header {
-    min-width: initial;
-    height: 60px;
-  }
-  main {
-    margin-top: 60px;
-  }
   h1 {
     color: black;
     font-size: 4em;
-    margin: 50px 0;
+    padding: 50px 0;
   }
   section.cover {
     height: 240px;
@@ -159,47 +149,6 @@ ul.sub-nav li a:hover {
     padding: 24px;
     font-size: 0.8em;
   }
-  #main-nav {
-    top: 60px;
-    right: 72px;
-    bottom: 48px;
-    left: 0;
-    position: fixed;
-    background: #fff;
-  }
-  header button {
-    padding: 0;
-    background: transparent;
-    border: none;
-  }
-  header button:hover {
-    cursor: pointer;
-  }
-  #nav-mobile-close {
-    float: right;
-  }
-  #main-nav > ul > li {
-    display: block;
-  }
-  .nav-list-item {
-    color: #000;
-  }
-  .mobile-nav-footer {
-    color: #000;
-    background: #fff;
-    position: absolute;
-    bottom: -48px;
-    left: 0;
-    right: 0;
-    padding: 24px;
-  }
-  ul.sub-nav {
-    width: calc(100% - 72px);
-  }
-  .caret {
-    float: right;
-  }
-  .flip {
-    transform: rotate(180deg);
+  p {
   }
 }

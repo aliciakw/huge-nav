@@ -1,10 +1,49 @@
 <!doctype html>
 <html>
-<head>
-  <title>HUGE NavExercise</title>
-  <link rel="stylesheet" href="/styles/main.css">
-</head>
-<body>
-<h1>Hello.</h1>
-</body>
+  <head>
+    <title>HUGE NavExercise</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div id="blanket"></div>
+    <header>
+      <button id="nav-mobile-open" class="visible-mobile">
+        <img src="/images/toggle-open.svg" height="60" />
+      </button>
+      <a class="hidden-mobile" href="/">
+        <img id="nav-logo-desktop" src="/images/HUGE-white.png" width="60" />
+      </a>
+      <nav id="main-nav" role="navigation" class="hidden-mobile">
+        <ul>
+        </ul>
+        <div class="visible-mobile mobile-nav-footer">
+          &copy; 2018 Huge. All rights reserved.
+        </div>
+      </nav>
+      <button id="nav-mobile-close" class="hidden">
+        <img src="/images/toggle-close.svg" height="60" />
+      </button>
+    </header>
+    <main>
+      <section class="cover">
+        <h1 class="hidden-mobile">Get paid for giving a shit.</h1>
+      </section>
+      <section>
+        <div class="visible-mobile">
+          <h1>Get paid for giving a shit.</h1>
+        </div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor non pellentesque nisi. Etiam lobortis eget quam et venenatis.
+          In purus tortor, congue ac libero vitae, vestibulum semper orci. Curabitur tempus imperdiet venenatis. Duis sagittis mauris
+          vel eros ornare, at vulputate libero consectetur. Pellentesque at ex eget tellus aliquam hendrerit a id arcu. Integer venenatis,
+          ante a pharetra vestibulum, urna eros feugiat mauris, eget vehicula mauris urna laoreet est. Ut rutrum libero eget mi bibendum,
+          vitae sollicitudin sem eleifend. Duis vel ligula sit amet quam efficitur congue sed et leo. Curabitur elit felis, eleifend
+          vel ex ac, blandit varius diam.
+        </p>
+      </section>
+    </main>
+    <script src="scripts/nav.js"></script>
+  </body>
 </html>

@@ -4,20 +4,24 @@
   "version": "0.1.1",
   "authors": [
     "Wes Hatch <whatch@hugeinc.com>",
-    "Karl Stanton <kstanton@hugeinc.com>"
+    "Karl Stanton <kstanton@hugeinc.com>",
+    "Alicia Willett <alicia.willett@gmail.com>"
   ],
   "license": "© 2016 Huge. All Rights Reserved.",
-  "homepage": "https://github.com/hugeinc/NavExercise",
+  "homepage": "https://github.com/aliciakw/huge-nav",
   "bugs": {
-    "url": "https://github.com/hugeinc/NavExercise/issues"
+    "url": "https://github.com/aliciakw/huge-nav/issues"
   },
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "express": "~4.2.0",
+    "express": "^4.16.3",
     "morgan": "~1.0.0"
+  },
+  "devDependencies": {
+    "jest": "^23.5.0"
   }
 }
