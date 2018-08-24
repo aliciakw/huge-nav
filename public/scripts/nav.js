@@ -119,7 +119,6 @@ function renderNavListItem({ label, url, items = [] }) {
 
 function buildNavFromJson() {
     var res = this.responseText;
-    // console.log('!!!!!!!!!!!!!', res);
     if (res) {
         var navData = JSON.parse(res).items;
         navData.forEach(renderNavListItem);
@@ -133,32 +132,25 @@ oReq.open("GET", "/api/nav.json");
 oReq.send();
 
 
-
-
-
-function sum (a, b) {
-  return a + b;
-} 
-
 mainNav.addEventListener('mouseenter', showBlanket);
 mainNav.addEventListener('mouseleave', hideBlanket);
 openMobileNavButton.addEventListener('click', toggleMobileNav);
 closeMobileNavButton.addEventListener('click', toggleMobileNav);
- 
+
 function getBlanket() {
-  return document.getElementById('blanket');
+    return document.getElementById('blanket');
 }
 
 if (typeof exports == "undefined") {
     exports = this;
 } else {
     module.exports = {
-        sum,
         getBlanket,
         buildNavFromJson,
         openMobileNav,
         closeMobileNav,
-        toggleMobileNav
+        toggleMobileNav,
+        renderNavListItem
     };
 }
 
